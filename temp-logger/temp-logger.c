@@ -17,15 +17,23 @@ struct Datos {
 
 };
 
-
+/*
+Muestra opciones al usuario
+*/
 void mostrar_menu()
 {
 	printf("Indique el nro de opción: \n");
 	printf("1 - Logger Temp \n");
+	printf("2 - Simula Temp \n");
 	printf("0 - Salir\n");
 }
 
-/*pasaje por referencia de una cadena*/
+/* 
+
+Obtener fecha y hora actual
+pasaje por referencia de una cadena
+
+*/
 
 void leer_fecha_hora(char* fh)
 {
@@ -37,7 +45,9 @@ void leer_fecha_hora(char* fh)
 //	return buff;
 }
 
-/* Regresa temperatura CPU en float*/
+/* 
+Regresa temperatura CPU en float
+*/
 float leer_temperatura()
 {
 	FILE *fp;
@@ -61,10 +71,53 @@ float leer_temperatura()
   pclose(fp);
   return temp;
 }
+/***********************sensor simulado ******************************/
+/*
+genera números aleatorios entre 0 y 10, se lo suma a 25 y regresa el valor
+*/
+float simula_temperatura(){
+	float random_number_f = 	rand() % 1000 ; // genero numero aleatorio entre 0 y 1000
+	random_number_f = random_number_f / 100.0f;
 
+	return( 25 + random_number_f);
+}
+
+void sensor_cpu()
+{
+
+}
+void sensor_simulado()
+{
+	// timer ??
+	// obtiene valor temperatura
+    float temp = simula_temperatura();
+	// obtiene estampa de tiempo
+	char* t ;
+	leer_fecha_hora(t);
+	// guarda valores
+	
+}
+
+void guarda_en_csv_caracteres(char * fpath,Datos* d){
+
+}
+
+void guarda_estructura(char * fpath,Datos* d)
+{
+
+}
+
+struct Datos d ;
 
 int main(void)
 {
+
+   int i, n;
+   time_t t;
+  
+   /* Intializes random number generator */
+	srand((unsigned) time(&t));
+ 
 	struct Datos d ;
 	printf("Levantando otros programas\n");
 	int opcion = 1;
@@ -90,10 +143,7 @@ int main(void)
 				printf("%s \n",d.tiempo);
 			  break; 
 		   case 2  :
-			  system("clear");
-			  break;
- 		   case 3  :
-			  system("ifconfig");
+			  printf("%f\n",simula_temperatura());
 			  break;
 		   
 		   default : 
