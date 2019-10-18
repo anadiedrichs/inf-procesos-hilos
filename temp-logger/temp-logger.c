@@ -8,8 +8,13 @@
 #include<string.h>
 
 #define SALIR 0
-#define COMPILAR 
 
+/***/
+// C program for implementation of ftoa() 
+#include<stdio.h> 
+#include<math.h> 
+#include <pthread.h>
+/***/
 struct Datos {
 
 	char tiempo[20];
@@ -98,14 +103,16 @@ void sensor_simulado()
 	
 }
 
-void guarda_en_csv_caracteres(char * fpath,Datos* d){
+void guarda_en_csv_caracteres(char * fpath,struct Datos* d){
 
 }
 
-void guarda_estructura(char * fpath,Datos* d)
+void guarda_estructura(char * fpath,struct Datos* d)
 {
 
 }
+
+void enviar_datos(){}
 
 struct Datos d ;
 
@@ -114,6 +121,7 @@ int main(void)
 
    int i, n;
    time_t t;
+   float temp;
   
    /* Intializes random number generator */
 	srand((unsigned) time(&t));
@@ -137,19 +145,34 @@ int main(void)
 			   break; 
 			
 		   case 1  :				
-				d.temperatura = leer_temperatura();
-			    leer_fecha_hora(d.tiempo);
-				printf("%f \n",d.temperatura);
-				printf("%s \n",d.tiempo);
-			  break; 
-		   case 2  :
-			  printf("%f\n",simula_temperatura());
+
+			d.temperatura = leer_temperatura();
+			leer_fecha_hora(d.tiempo);
+			printf("%f \n",d.temperatura);
+			printf("%s \n",d.tiempo);
+
+			 temp = simula_temperatura();
+			 char* field1, field2, field3,field4;
+			  
+ 			  
+  			 char comando[550]; 
+	
+// curl --silent --request POST --header "X-THINGSPEAKAPIKEY: W9RJ5HX0W51QKLCX" --data "field1=26.2&field2=36.2&field3=17.8&field4=35.2" "http://api.thingspeak.com/update"
+
+			sprintf(comando,"curl --silent --request POST --header \"X-THINGSPEAKAPIKEY: W9RJ5HX0W51QKLCX\" --data \"field1=%.2f&field2=%.2f&field3=%.2f&field4=%.2f\"  \"http://api.thingspeak.com/update\"", d.temperatura, temp, temp,temp); 
+
+			system(comando);
+
+	// The string "sum of 10 and 20 is 30" is stored 
+	// into buffer instead of printing on stdout 
+			printf("%s", comando); 
+
 			  break;
 		   
 		   default : 
-			printf("Ingrese una opción válida  \n");	
+			printf("\nIngrese una opción válida  \n");	
 		   
-		}
+		}// fin switch
 	} // fin while 
     return 0;
 }
