@@ -1,3 +1,11 @@
+/*
+       .__            __   
+  ____ |  |__ _____ _/  |_ 
+_/ ___\|  |  \\__  \\   __\
+\  \___|   Y  \/ __ \|  |  
+ \___  >___|  (____  /__|  
+     \/     \/     \/      */
+
 // C program to implement one side of FIFO 
 // This side reads first, then reads 
 #include <stdio.h> 
